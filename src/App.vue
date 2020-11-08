@@ -1,11 +1,17 @@
 <template>
   <v-app>
     <v-app-bar
-      app
-      color="primary"
-      dark
+    app
+    class="grad"
     >
-      <div class="d-flex align-center">
+    <div class="d-flex align-center">
+        <v-img
+          class="shrink mr-2"
+          src="@/assets/logo.png"
+          transition="scale-transition"
+        />
+      </div>
+      <!-- <div class="d-flex align-center">
         <v-img
           alt="Vuetify Logo"
           class="shrink mr-2"
@@ -34,27 +40,33 @@
       >
         <span class="mr-2">{{test}}</span>
         <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+      </v-btn> -->
     </v-app-bar>
 
     <v-main>
-      <appForm/>
+      <v-row align="center" justify="center" width="90%">
+        <v-col
+          cols="12"
+        >
+          <router-view />
+        </v-col>
+      </v-row>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import appForm from './components/appForm';
+// import appForm from './components/appForm';
 
 export default {
   name: 'App',
 
   components: {
-    appForm,
+    // appForm,
   },
   computed: {
     test(){
-      return this.$store.getters.test
+      return this.$store.getters.resultado
     }
   },
   data: () => ({
@@ -62,3 +74,8 @@ export default {
   }),
 };
 </script>
+<style scoped>
+.grad {
+  background-image: linear-gradient(to right, #ffffff, #ECF7D0, #b0f86a, #00e1cd);
+}
+</style>

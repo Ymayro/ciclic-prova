@@ -1,0 +1,17 @@
+
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import appForm from '@/components/appForm.vue'
+import showValues from '@/components/showValues.vue'
+
+Vue.use(VueRouter)
+const routes = [
+    { path: '/', component: appForm },
+    { path: '/simular', component: showValues }
+]
+const router = new VueRouter({
+    mode: 'history',
+    routes
+})
+
+export default router
