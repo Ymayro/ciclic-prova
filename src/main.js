@@ -3,7 +3,7 @@ import App from './App.vue'
 import vuetify from './plugins/vuetify';
 import Vuex from 'vuex'
 import VueMask from 'v-mask'
-import {store} from '@/store.js';
+import store from '@/store.js';
 import VCurrencyField from 'v-currency-field'
 import { VTextField } from 'vuetify/lib'
 import router from '@/router.js'

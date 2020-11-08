@@ -5,10 +5,11 @@ import router from '@/router'
 import axiosAPI from '@/axios'
 
 Vue.use(Vuex)
-export const store = new Vuex.Store({
+ const store = new Vuex.Store({
     state: {
         resultado: null,
-        informacoes: null
+        informacoes: null,
+        carregando: false
     },
     mutations: {
         resultado(state, payload) {
@@ -17,23 +18,32 @@ export const store = new Vuex.Store({
         informacoes(state, payload) {
             state.informacoes = payload
         },
+        carregando(state) {
+            state.carregando = !state.carregando
+        },
     },
     actions: {
         simular({commit},payload){
+            commit('carregando')
             axiosAPI.post('/', { "expr": payload.mensalidade + " * (((1 + 0.00517) ^ " + payload.tempo + " - 1) / 0.00517)" })
               .then(function (response) {
-                console.log(response);
                 commit('resultado', response.data)
                 commit('informacoes', payload)
-                router.push('simular')
+                
+              }).then(function () {
+                router.push('/simular')
+                commit('carregando')
               })
               .catch(function (error) {
                 console.log(error);
+                commit('carregando')
               });
         }
     },
     getters: {
         resultado: state => state.resultado,
-        informacoes: state => state.informacoes
+        informacoes: state => state.informacoes,
+        carregando: state => state.carregando
     }
 })
+export default store
